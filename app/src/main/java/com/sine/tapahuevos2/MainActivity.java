@@ -8,10 +8,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         mEmailField = (EditText) findViewById(R.id.emailField);
         mPasswordField = (EditText) findViewById(R.id.passwordField);
-        mLoginBtn = (Button) findViewById(R.id.loginBtn);
+        mLoginBtn = (Button) findViewById(R.id.LoginBtn);
         mSignUpBtn = (Button) findViewById(R.id.SignUpBtn) ;
 
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                startActivity(new Intent(MainActivity.this, SignUpActivity.class));
+                startActivity(new Intent(MainActivity.this, SignUpActivityUsername.class));
             }
         });
 
