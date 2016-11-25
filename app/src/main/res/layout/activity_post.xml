@@ -5,21 +5,24 @@
     android:id="@+id/activity_post"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sine.tapahuevos2.PostActivity">
+    tools:context="com.sine.tapahuevos2.PostActivity"
+    android:scrollbarAlwaysDrawHorizontalTrack="false"
+    android:scrollbarAlwaysDrawVerticalTrack="false">
 
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content" app:srcCompat="@mipmap/add_btn"
         android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-        android:id="@+id/imageButton" android:background="@android:color/white"
-        android:scaleType="centerCrop" android:adjustViewBounds="true"/>
+        android:id="@+id/ImageSelect" android:background="@android:color/white"
+        android:adjustViewBounds="true" android:scaleType="centerCrop" android:maxHeight="300dp"
+        android:nestedScrollingEnabled="true"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/imageButton" android:layout_centerHorizontal="true"
-        android:id="@+id/editText" android:hint="Titulo de tu publicación"
+        android:layout_below="@+id/ImageSelect" android:layout_centerHorizontal="true"
+        android:id="@+id/titleField" android:hint="Titulo de tu publicación"
         android:background="@drawable/input_outline"
         android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
         android:layout_marginRight="20dp" android:padding="10dp" android:singleLine="true"/>
@@ -29,14 +32,15 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:background="@drawable/input_outline"
-        android:id="@+id/editText2" android:layout_below="@+id/editText"
+        android:id="@+id/descField" android:layout_below="@+id/titleField"
         android:layout_centerHorizontal="true" android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp" android:layout_marginRight="20dp"
-        android:hint="Descripción" android:padding="15dp" android:singleLine="true"/>
+        android:hint="Añadir un comentario..." android:padding="15dp" android:singleLine="true"
+        android:cursorVisible="true" android:layout_marginBottom="10dp"/>
     <Button
         android:text="Compartir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" android:id="@+id/button2"
+        android:layout_centerHorizontal="true" android:id="@+id/submitBtn"
         android:background="@color/colorPrimary" android:textColor="@android:color/white"/>
 </RelativeLayout>
