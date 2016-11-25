@@ -76,6 +76,7 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             Toast.makeText(SingUpActivityEmail.this, "Registro Exitoso",Toast.LENGTH_LONG).show();
+
                         }
                         else {
                             Toast.makeText(SingUpActivityEmail.this, "Ups! ocurrio un problema, intenta de nuevo",Toast.LENGTH_LONG).show();

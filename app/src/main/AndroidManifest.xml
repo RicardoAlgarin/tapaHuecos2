@@ -16,11 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".AccountActivity">
-        </activity>
         <activity android:name=".SignUpActivityUsername">
         </activity>
         <activity android:name=".SingUpActivityEmail">
+        </activity>
+        <activity
+            android:name=".Home_News"
+            android:label="@string/title_activity_home__news"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
