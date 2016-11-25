@@ -25,6 +25,8 @@
             android:label="@string/title_activity_home__news"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".PostActivity">
+        </activity>
     </application>
 
 </manifest>
