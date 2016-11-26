@@ -1,11 +1,13 @@
 package com.sine.tapahuevos2;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Contacts;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -106,7 +108,12 @@ public class PostActivity extends AppCompatActivity {
                     //TODO: insertar id para mirar quien publico newPost.child("uid").setValue(FirebaseAuth.get)
                     mProgressDialog.dismiss();
 
-                    startActivity(new Intent(PostActivity.this, Home_News.class));
+
+                    Intent intent = new Intent(PostActivity.this, Home_News.class);
+                    ComponentName cn = intent.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
+
 
 
                 }

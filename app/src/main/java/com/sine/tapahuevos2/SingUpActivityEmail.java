@@ -73,7 +73,7 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
 
         }
         mProgressDialog.setMessage("Espera un momento...");
-        mProgressDialog.show(this,"Registro","Espere un momento",false,true);
+        mProgressDialog.show();
 
 
 

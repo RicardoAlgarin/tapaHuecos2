@@ -1,10 +1,13 @@
 package com.sine.tapahuevos2;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -24,6 +28,9 @@ public class Home_News extends AppCompatActivity {
 
     private RecyclerView mBloglist;
     private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthlistener;
+
 
 
     @Override
@@ -32,6 +39,24 @@ public class Home_News extends AppCompatActivity {
         setContentView(R.layout.activity_home__news);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthlistener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser() == null){
+
+                    Intent intent = new Intent(Home_News.this, MainActivity.class);
+                    ComponentName cn = intent.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
+
+                }
+            }
+        };
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
 
@@ -116,8 +141,22 @@ public class Home_News extends AppCompatActivity {
 
             startActivity(new Intent(Home_News.this, PostActivity.class));
         }
+
+        if (item.getItemId() == R.id.action_close_sesion){
+
+           mAuth.signOut();
+
+        }
+
+        if(item.getItemId() == R.id.action_close){
+
+            Intent close = new Intent(Intent.ACTION_MAIN);
+            finish();
+        }
+
         return super.onOptionsItemSelected(item);
     }
+
 }
 
 

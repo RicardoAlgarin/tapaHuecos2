@@ -1,9 +1,11 @@
 package com.sine.tapahuevos2;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -53,7 +55,12 @@ public class MainActivity extends AppCompatActivity {
 
                 if (firebaseAuth.getCurrentUser()!= null){
 
-                startActivity(new Intent(MainActivity.this, Home_News.class));
+                    Intent intent = new Intent(MainActivity.this, Home_News.class);
+                    ComponentName cn = intent.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
+
+
 
 
                 }
@@ -119,7 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 if (task.isSuccessful()){
-                    Toast.makeText(MainActivity.this, "Estas registrado :D ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Bienvenido ", Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(MainActivity.this, Home_News.class);
+                    ComponentName cn = intent.getComponent();
+                    Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
 
                 }
             }
