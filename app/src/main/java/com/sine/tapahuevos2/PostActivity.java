@@ -107,6 +107,8 @@ public class PostActivity extends AppCompatActivity {
                     //TODO: insertar id para mirar quien publico newPost.child("uid").setValue(FirebaseAuth.get)
                     mProgressDialog.dismiss();
 
+                    startActivity(new Intent(PostActivity.this, Home_News.class));
+
 
                 }
             });
