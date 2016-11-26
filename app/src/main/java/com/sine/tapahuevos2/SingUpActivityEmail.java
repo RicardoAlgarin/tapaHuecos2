@@ -18,6 +18,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 public class SingUpActivityEmail extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,7 +30,8 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
     private EditText mEditTextpassword;
     private ProgressDialog mProgressDialog;
     private FirebaseAuth mFirebaseAuth;
-
+    private DatabaseReference mDatabase;
+    private TextView user_nickname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +39,14 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_sing_up_email);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
 
         String nombre = getIntent().getStringExtra("username");
 
         TextView musername = (TextView) findViewById(R.id.username_greetings);
         musername.setText(nombre+",");
 
-
+        user_nickname = (TextView) findViewById(R.id.username_greetings);
         final_btn_register = (Button) findViewById(R.id.final_btn_register);
         mEditTextemail = (EditText) findViewById(R.id.editTextemail);
         mEditTextpassword = (EditText) findViewById(R.id.editTextpassword);
@@ -50,6 +56,7 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
 
     private void registerUser(){
 
+        final String name = user_nickname.getText().toString().trim();
         String email = mEditTextemail.getText().toString().trim();
         String password = mEditTextpassword.getText().toString().trim();
         mProgressDialog = new ProgressDialog(this);
@@ -75,6 +82,13 @@ public class SingUpActivityEmail extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+
+                            String user_id = mFirebaseAuth.getCurrentUser().getUid();
+                            DatabaseReference current_user_db = mDatabase.child(user_id);
+                            current_user_db.child("name").setValue(name);
+                            current_user_db.child("image").setValue("default");
+
+
                             Toast.makeText(SingUpActivityEmail.this, "Registro Exitoso",Toast.LENGTH_LONG).show();
                             mProgressDialog.dismiss();
 
