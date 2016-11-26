@@ -74,8 +74,6 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 starPosting();
-              mProgressDialog.setMessage("Compartiendo tu publicación...");
-              mProgressDialog.show();
 
 
             }
@@ -84,13 +82,14 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void starPosting() {
+        mProgressDialog.setMessage("Compartiendo tu publicación...");
 
 
         final String title_val = mtitleField.getText().toString().trim();
         final String desc_val = mdescField.getText().toString().trim();
 
         if (!TextUtils.isEmpty(title_val)&& !TextUtils.isEmpty(desc_val) && mimageUri != null){
-
+            mProgressDialog.show();
 
             StorageReference filepath = mStorage.child("Blog_Images").child(mimageUri.getLastPathSegment());
 

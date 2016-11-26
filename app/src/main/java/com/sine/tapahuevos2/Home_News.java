@@ -1,5 +1,6 @@
 package com.sine.tapahuevos2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +12,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 public class Home_News extends AppCompatActivity {
 
@@ -56,6 +59,7 @@ public class Home_News extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+                viewHolder.setImage(getApplicationContext(), model.getImage());
 
 
             }
@@ -88,6 +92,15 @@ public class Home_News extends AppCompatActivity {
             post_desc.setText(desc);
 
         }
+
+        public  void  setImage (Context ctx, String image){
+
+            ImageView post_image = (ImageView)mView.findViewById(R.id.post_image);
+            Picasso.with(ctx).load(image).into(post_image);
+
+
+        }
+
     }
 
     @Override
