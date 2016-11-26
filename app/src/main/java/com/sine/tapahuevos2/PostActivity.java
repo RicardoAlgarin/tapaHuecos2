@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.Contacts;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,6 +38,7 @@ public class PostActivity extends AppCompatActivity {
     private Uri mimageUri = null;
     private StorageReference mStorage;
     private ProgressDialog mProgressDialog;
+    private DatabaseReference mDatabase;
 
 
 
@@ -44,6 +49,8 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
 
      mStorage = FirebaseStorage.getInstance().getReference();
+     mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
+
 
         mSelectImage = (ImageButton) findViewById(R.id.ImageSelect);
         mtitleField = (EditText) findViewById(R.id.titleField);
@@ -67,9 +74,8 @@ public class PostActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 starPosting();
-                Toast.makeText(PostActivity.this, "Compartiendo publicacion", Toast.LENGTH_LONG).show();
-              //  mProgressDialog.setMessage("Compartiendo tu publicación...");
-              //  mProgressDialog.show();
+              mProgressDialog.setMessage("Compartiendo tu publicación...");
+              mProgressDialog.show();
 
 
             }
@@ -80,12 +86,11 @@ public class PostActivity extends AppCompatActivity {
     private void starPosting() {
 
 
-        String title_val = mtitleField.getText().toString().trim();
-        String desc_val = mdescField.getText().toString().trim();
+        final String title_val = mtitleField.getText().toString().trim();
+        final String desc_val = mdescField.getText().toString().trim();
 
         if (!TextUtils.isEmpty(title_val)&& !TextUtils.isEmpty(desc_val) && mimageUri != null){
 
-            Toast.makeText(PostActivity.this, "Formulario completo", Toast.LENGTH_LONG).show();
 
             StorageReference filepath = mStorage.child("Blog_Images").child(mimageUri.getLastPathSegment());
 
@@ -94,22 +99,17 @@ public class PostActivity extends AppCompatActivity {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    Toast.makeText(PostActivity.this, "subida exitosa", Toast.LENGTH_LONG).show();
+
+                    DatabaseReference newPost = mDatabase.push();
+                    newPost.child("title").setValue(title_val);
+                    newPost.child("desc").setValue(desc_val);
+                    newPost.child("image").setValue(downloadUrl.toString());
+                    //TODO: insertar id para mirar quien publico newPost.child("uid").setValue(FirebaseAuth.get)
+                    mProgressDialog.dismiss();
 
 
                 }
             });
-
-         /*   StorageReference filepath = mStorageRefef.child("Blog_Images").child(mimageUri.getLastPathSegment());
-
-           filepath.putFile(mimageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                    Toast.makeText(PostActivity.this, "Publicacion upload! :D", Toast.LENGTH_LONG).show();
-             //    mProgressDialog.dismiss();
-                }
-            });*/
 
         }
 
