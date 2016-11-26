@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,6 +146,13 @@ public class Home_News extends AppCompatActivity {
         if (item.getItemId() == R.id.action_close_sesion){
 
            mAuth.signOut();
+
+            Intent intent = new Intent(Home_News.this, MainActivity.class);
+            ComponentName cn = intent.getComponent();
+            Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+            startActivity(mainIntent);
+            Toast.makeText(this,"Logeate de nuevo",Toast.LENGTH_LONG).show();
+
 
         }
 
