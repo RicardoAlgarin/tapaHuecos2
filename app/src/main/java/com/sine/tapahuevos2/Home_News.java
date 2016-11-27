@@ -41,6 +41,7 @@ public class Home_News extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
 
+        // AUTENTICACION
         mAuth = FirebaseAuth.getInstance();
 
         mAuthlistener = new FirebaseAuth.AuthStateListener() {
@@ -68,6 +69,7 @@ public class Home_News extends AppCompatActivity {
 
     }
 
+    // ONSTART
     @Override
     protected void onStart() {
         super.onStart();
@@ -91,10 +93,24 @@ public class Home_News extends AppCompatActivity {
             }
         };
 
+
+
+
+
+
+
+
+
         mBloglist.setAdapter(firebaseRecyclerAdapter);
 
 
     }
+
+
+
+
+
+
 
     public static class BlogViewHolder extends RecyclerView.ViewHolder{
 
@@ -129,12 +145,18 @@ public class Home_News extends AppCompatActivity {
 
     }
 
+
+
+    //OPCIONES ITEMS DE MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
