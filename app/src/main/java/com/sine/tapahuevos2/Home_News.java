@@ -29,6 +29,7 @@ public class Home_News extends AppCompatActivity {
 
     private RecyclerView mBloglist;
     private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase_photos;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthlistener;
 
@@ -61,6 +62,8 @@ public class Home_News extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
+        mDatabase_photos = FirebaseDatabase.getInstance().getReference().child("Blog");
+
 
         mBloglist = (RecyclerView) findViewById(R.id.blog_list);
         mBloglist.setHasFixedSize(true);
@@ -94,15 +97,24 @@ public class Home_News extends AppCompatActivity {
         };
 
 
+        FirebaseRecyclerAdapter<Blog_photo,BlogViewHolder2> firebaseRecyclerAdapter1 = new FirebaseRecyclerAdapter<Blog_photo, BlogViewHolder2>(
+                Blog_photo.class,
+                R.layout.blog_row_photo,
+                BlogViewHolder2.class,
+                mDatabase_photos
+        ) {
+            @Override
+            protected void populateViewHolder(BlogViewHolder2 viewHolder, Blog_photo model, int position) {
 
+                viewHolder.setTitle(model.getTitle());
+                viewHolder.setDesc(model.getDesc());
+                viewHolder.setImage(getApplicationContext(), model.getImage());
 
-
-
-
-
+            }
+        };
 
         mBloglist.setAdapter(firebaseRecyclerAdapter);
-
+        mBloglist.setAdapter(firebaseRecyclerAdapter1);
 
     }
 
@@ -144,6 +156,47 @@ public class Home_News extends AppCompatActivity {
         }
 
     }
+
+
+
+
+
+
+    public static class BlogViewHolder2 extends RecyclerView.ViewHolder{
+
+        View mView;
+
+        public BlogViewHolder2(View itemView) {
+            super(itemView);
+
+            mView=  itemView ;
+
+        }
+
+        public void setTitle(String title){
+
+            TextView post_title = (TextView) mView.findViewById(R.id.post_title_photo);
+            post_title.setText(title);
+        }
+
+        public void  setDesc (String desc){
+            TextView post_desc = (TextView) mView.findViewById(R.id.post_desc_photo);
+            post_desc.setText(desc);
+
+        }
+
+        public  void  setImage (Context ctx, String image){
+
+            ImageView post_image = (ImageView)mView.findViewById(R.id.post_image_photo);
+            Picasso.with(ctx).load(image).into(post_image);
+
+
+        }
+
+    }
+
+
+
 
 
 

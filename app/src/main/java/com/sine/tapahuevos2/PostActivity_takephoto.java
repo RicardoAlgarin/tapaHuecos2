@@ -22,6 +22,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+
 public class PostActivity_takephoto extends AppCompatActivity {
 
     private ImageButton mSelectImage;
@@ -44,7 +45,7 @@ public class PostActivity_takephoto extends AppCompatActivity {
         setContentView(R.layout.activity_post_take_photo);
 
      mStorage = FirebaseStorage.getInstance().getReference();
-     mDatabase = FirebaseDatabase.getInstance().getReference().child("photo");
+     mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
 
 
         mSelectImage = (ImageButton) findViewById(R.id.take_photo_capture);
@@ -90,7 +91,7 @@ public class PostActivity_takephoto extends AppCompatActivity {
         if (!TextUtils.isEmpty(title_val)&& !TextUtils.isEmpty(desc_val) && mimageUri != null){
             mProgressDialog.show();
 
-            StorageReference filepath = mStorage.child("Blog_Photos").child(mimageUri.getLastPathSegment());
+            StorageReference filepath = mStorage.child("Blog").child(mimageUri.getLastPathSegment());
 
             filepath.putFile(mimageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -108,10 +109,10 @@ public class PostActivity_takephoto extends AppCompatActivity {
                     Uri downloadUri = taskSnapshot.getDownloadUrl();
                     Picasso.with(PostActivity_takephoto.this).load(downloadUri).fit().centerCrop().into(mSelectImage);
 
-                 //   Intent intent = new Intent(PostActivity_takephoto.this, Home_News.class);
-                  //  ComponentName cn = intent.getComponent();
-                  //  Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
-                   //  startActivity(mainIntent);
+                 Intent intent = new Intent(PostActivity_takephoto.this, Home_News.class);
+                  ComponentName cn = intent.getComponent();
+                   Intent mainIntent = IntentCompat.makeRestartActivityTask(cn);
+                    startActivity(mainIntent);
 
 
 
