@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" app:srcCompat="@mipmap/add_btn"
         android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-        android:id="@+id/image_select" android:background="@android:color/white"
+        android:id="@+id/take_photo_capture" android:background="@android:color/white"
         android:adjustViewBounds="true" android:scaleType="centerCrop" android:maxHeight="300dp"
         android:nestedScrollingEnabled="true"/>
     <EditText
@@ -21,8 +21,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:layout_below="@+id/image_select" android:layout_centerHorizontal="true"
-        android:id="@+id/titleField" android:hint="Titulo de tu publicación"
+        android:layout_below="@+id/take_photo_capture" android:layout_centerHorizontal="true"
+        android:id="@+id/titleField_photo" android:hint="Titulo de tu publicación"
         android:background="@drawable/input_outline"
         android:layout_marginLeft="20dp" android:layout_marginTop="20dp"
         android:layout_marginRight="20dp" android:padding="10dp" android:singleLine="true"/>
@@ -32,7 +32,7 @@
         android:inputType="textMultiLine"
         android:ems="10"
         android:background="@drawable/input_outline"
-        android:id="@+id/descField" android:layout_below="@+id/titleField"
+        android:id="@+id/descField_photo" android:layout_below="@+id/titleField_photo"
         android:layout_centerHorizontal="true" android:layout_marginTop="20dp"
         android:layout_marginLeft="20dp" android:layout_marginRight="20dp"
         android:hint="Añadir un comentario..." android:padding="15dp" android:singleLine="true"
@@ -41,6 +41,6 @@
         android:text="Compartir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" android:id="@+id/submitBtn"
+        android:layout_centerHorizontal="true" android:id="@+id/submitBtn_photo"
         android:background="@color/colorPrimary" android:textColor="@android:color/white"/>
 </RelativeLayout>

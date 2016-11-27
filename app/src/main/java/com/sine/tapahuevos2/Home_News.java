@@ -143,6 +143,13 @@ public class Home_News extends AppCompatActivity {
             startActivity(new Intent(Home_News.this, PostActivity.class));
         }
 
+        if (item.getItemId() == R.id.action_take_photo){
+
+
+            startActivity(new Intent(Home_News.this, PostActivity_takephoto.class));
+
+        }
+
         if (item.getItemId() == R.id.action_close_sesion){
 
            mAuth.signOut();

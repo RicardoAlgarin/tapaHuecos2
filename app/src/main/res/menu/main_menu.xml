@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/action_add" android:icon="@mipmap/ic_add_a_photo_white_24dp" android:title=" "
+    <item android:id="@+id/action_take_photo" android:icon="@mipmap/ic_add_a_photo_white_24dp" android:title=" "
           app:showAsAction="always"/>
-    <item android:title="Configuración" android:visible="true" android:id="@+id/action_settings"/>
-    <item android:title="Cerrar Sesion" android:id="@+id/action_close_sesion"/>
-    <item android:title="Nosotros" android:titleCondensed="" android:id="@+id/action_about_us"/>
+
+    <item android:title="Galería" android:visible="true" android:id="@+id/action_add" android:icon="@mipmap/ic_insert_photo_white_24dp"
+          android:showAsAction="always"/>
+
+    <group>
+
+        <item android:title="Nosotros" android:titleCondensed="" android:id="@+id/action_about_us"/>
+        <item android:title="Cerrar Sesion" android:id="@+id/action_close_sesion"/>
+    </group>
     <item android:title="Salir" android:icon="@android:drawable/ic_menu_close_clear_cancel"
           android:id="@+id/action_close"/>
 </menu>
