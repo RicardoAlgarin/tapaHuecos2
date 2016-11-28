@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,8 @@ public class PostActivity_takephoto extends AppCompatActivity {
 
       mProgressDialog = new  ProgressDialog(this);
 
+
+
        mSelectImage.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -91,7 +94,7 @@ public class PostActivity_takephoto extends AppCompatActivity {
         if (!TextUtils.isEmpty(title_val)&& !TextUtils.isEmpty(desc_val) && mimageUri != null){
             mProgressDialog.show();
 
-            StorageReference filepath = mStorage.child("Blog").child(mimageUri.getLastPathSegment());
+            StorageReference filepath = mStorage.child("Blog<").child(mimageUri.getLastPathSegment());
 
             filepath.putFile(mimageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override

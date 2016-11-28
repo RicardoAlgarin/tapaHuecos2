@@ -23,6 +23,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class Home_News extends AppCompatActivity {
@@ -41,6 +43,17 @@ public class Home_News extends AppCompatActivity {
         setContentView(R.layout.activity_home__news);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
+
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(v, "Se presionó el FAB", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
 
         // AUTENTICACION
         mAuth = FirebaseAuth.getInstance();
@@ -62,7 +75,9 @@ public class Home_News extends AppCompatActivity {
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference().child("Blog");
+        mDatabase.keepSynced(true);
         mDatabase_photos = FirebaseDatabase.getInstance().getReference().child("Blog");
+        mDatabase_photos.keepSynced(true);
 
 
         mBloglist = (RecyclerView) findViewById(R.id.blog_list);
@@ -147,10 +162,11 @@ public class Home_News extends AppCompatActivity {
 
         }
 
-        public  void  setImage (Context ctx, String image){
+        public  void  setImage (final Context ctx, final String image){
 
-            ImageView post_image = (ImageView)mView.findViewById(R.id.post_image);
+           final  ImageView post_image = (ImageView)mView.findViewById(R.id.post_image);
             Picasso.with(ctx).load(image).into(post_image);
+
 
 
         }
@@ -194,12 +210,6 @@ public class Home_News extends AppCompatActivity {
         }
 
     }
-
-
-
-
-
-
     //OPCIONES ITEMS DE MENU
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
