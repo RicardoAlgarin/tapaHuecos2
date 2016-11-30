@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.jsontype.SubtypeResolver;
 import com.fasterxml.jackson.databind.node.IntNode;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,6 +90,7 @@ public class Home_News extends AppCompatActivity {
         mBloglist.setLayoutManager(new LinearLayoutManager(this));
 
 
+
     }
 
     // ONSTART
@@ -109,8 +111,8 @@ public class Home_News extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
-        /*        viewHolder.setlatitud(model.getLatitud());
-                viewHolder.setlongitud(model.getLongitud());*/
+                viewHolder.setLatitud(model.getLatitud());
+                viewHolder.setLongitud(model.getLongitud());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
 
 
@@ -129,8 +131,8 @@ public class Home_News extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
-     /*             viewHolder.setlatitud(model.getLatitud());
-               viewHolder.setlongitud(model.getLongitud());*/
+                viewHolder.setLatitud(model.getLatitud());
+               viewHolder.setLongitud(model.getLongitud());
                 viewHolder.setImage(getApplicationContext(), model.getImage());
 
             }
@@ -160,32 +162,35 @@ public class Home_News extends AppCompatActivity {
 
         public void setTitle(String title){
 
-            TextView post_title = (TextView) mView.findViewById(R.id.post_title);
+            TextView post_title = (TextView) mView.findViewById(R.id.post_title_photo);
             post_title.setText(title);
         }
 
         public void  setDesc (String desc){
-            TextView post_desc = (TextView) mView.findViewById(R.id.post_desc);
+            TextView post_desc = (TextView) mView.findViewById(R.id.post_desc_photo);
             post_desc.setText(desc);
 
         }
 
-   /*   public void setlatitud (String latitud){
+        public void setLatitud (String latitud){
 
-            TextView post_latitud = (TextView) mView.findViewById(R.id.post_latitud);
+            TextView post_latitud = (TextView) mView.findViewById(R.id.post_lat_card);
             post_latitud.setText(latitud);
         }
 
-        public void  setlongitud (String longitud) {
+        public void  setLongitud (String longitud){
 
-            TextView post_longitud = (TextView) mView.findViewById(R.id.post_longitud);
+            TextView post_longitud = (TextView) mView.findViewById(R.id.post_lng_card);
             post_longitud.setText(longitud);
         }
-        */
+
+
+
+
 
         public  void  setImage (final Context ctx, final String image){
 
-           final  ImageView post_image = (ImageView)mView.findViewById(R.id.post_image);
+           final  ImageView post_image = (ImageView)mView.findViewById(R.id.post_image_photo);
             Picasso.with(ctx).load(image).into(post_image);
 
 
@@ -193,9 +198,6 @@ public class Home_News extends AppCompatActivity {
         }
 
     }
-
-
-
 
 
 
@@ -222,18 +224,18 @@ public class Home_News extends AppCompatActivity {
 
         }
 
-   /*     public void setlatitud (String latitud){
+        public void setLatitud (String latitud){
 
-            TextView post_latitud = (TextView) mView.findViewById(R.id.post_latitud_photo);
+            TextView post_latitud = (TextView) mView.findViewById(R.id.post_lat_card_tkphoto);
             post_latitud.setText(latitud);
         }
 
-        public void  setlongitud (String longitud){
+        public void  setLongitud (String longitud){
 
-            TextView post_longitud = (TextView) mView.findViewById(R.id.post_longitud_photo);
+            TextView post_longitud = (TextView) mView.findViewById(R.id.post_lng_card_tkphoto);
             post_longitud.setText(longitud);
         }
-*/
+
         public  void  setImage (Context ctx, String image){
 
             ImageView post_image = (ImageView)mView.findViewById(R.id.post_image_photo);

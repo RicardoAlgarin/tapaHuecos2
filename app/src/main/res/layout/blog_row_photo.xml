@@ -27,31 +27,47 @@
                   tools:text="Descripción de tu publicacion"
                   android:paddingBottom="10dp" android:paddingLeft="10dp"
                   android:paddingRight="10dp" android:padding="15dp"/>
-
-  <!--
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="?android:attr/textColorLinkInverse">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@mipmap/ic_person_pin_white_24dp" android:id="@+id/imageView_photo"
-                android:layout_weight="1"/>
-            <TextView
-                android:text="Latitud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/post_latitud_photo"
-                android:layout_weight="2"/>
-            <TextView
-                android:text="Longitud"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/post_longitud_photo"
-                android:layout_weight="2"
-                android:textColor="@drawable/ic_cast_white"
-            />
-        </LinearLayout>-->
+            android:layout_height="wrap_content" android:id="@+id/post_lat_card_tkphoto"
+            android:text="Latitud"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/post_lng_card_tkphoto"
+            android:text="Longitud"/>
+        <Button
+
+            android:textColor="@color/colorAccent"
+            android:text="Ubicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/btn_ubicacion_card"
+            android:layout_gravity="right"/>
+
+
+        <!--
+              <LinearLayout
+                  xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="horizontal"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent" android:background="?android:attr/textColorLinkInverse">
+                  <ImageView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      app:srcCompat="@mipmap/ic_person_pin_white_24dp" android:id="@+id/imageView_photo"
+                      android:layout_weight="1"/>
+                  <TextView
+                      android:text="Latitud"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" android:id="@+id/post_latitud_photo"
+                      android:layout_weight="2"/>
+                  <TextView
+                      android:text="Longitud"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content" android:id="@+id/post_longitud_photo"
+                      android:layout_weight="2"
+                      android:textColor="@drawable/ic_cast_white"
+                  />
+              </LinearLayout>-->
 
 
 

@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -37,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -75,9 +77,9 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
 
         if (location != null) {
             lat = location.getLatitude();
-            lblLatidud.setText("Latitud:"+String.valueOf(lat));
+            lblLatidud.setText(String.valueOf(lat));
             lng = location.getLongitude();
-            lblLongitud.setText("Longitud:"+String.valueOf(lng));
+            lblLongitud.setText(String.valueOf(lng));
             mark_icon_location_ok.setVisibility(View.VISIBLE);
 
          /*   Toast toast =
@@ -289,9 +291,10 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
                     DatabaseReference newPost = mDatabase.push();
                     newPost.child("title").setValue(title_val);
                     newPost.child("desc").setValue(desc_val);
-                    newPost.child("Latitud").setValue(lblLatidud);
-                    newPost.child("Longitud").setValue(lblLongitud);
+                    newPost.child("latitud").setValue(lat_val);
+                    newPost.child("longitud").setValue(lng_val);
                     newPost.child("image").setValue(downloadUrl.toString());
+
                     //TODO: insertar id para mirar quien publico newPost.child("uid").setValue(FirebaseAuth.get)
                     mProgressDialog.dismiss();
 
