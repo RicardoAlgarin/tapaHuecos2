@@ -18,11 +18,14 @@ import android.support.v4.content.IntentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -64,6 +67,7 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
     private TextView lblLongitud;
     double lat = 0.0;
     double lng = 0.0;
+    private ImageView mark_icon_location_ok;
 
 
 
@@ -74,6 +78,13 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
             lblLatidud.setText("Latitud:"+String.valueOf(lat));
             lng = location.getLongitude();
             lblLongitud.setText("Longitud:"+String.valueOf(lng));
+            mark_icon_location_ok.setVisibility(View.VISIBLE);
+
+         /*   Toast toast =
+
+            Toast.makeText(this,"Hueco Ubicado",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER|Gravity.LEFT,200,-100);
+            toast.show(); */
 
 
 
@@ -132,6 +143,7 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
         mgetlocalitacion= (Button) findViewById(R.id.localitation_btn_takephoto);
         lblLatidud = (TextView) findViewById(R.id.lat_texview_take_photo);
         lblLongitud = (TextView) findViewById(R.id.lng_texview_take_photo);
+        mark_icon_location_ok = (ImageView) findViewById(R.id.icon_mark_successfuly_location);
 
 
       /*  apiClient = new GoogleApiClient.Builder(this)
@@ -260,6 +272,8 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
 
         final String title_val = mtitleField.getText().toString().trim();
         final String desc_val = mdescField.getText().toString().trim();
+        final String lat_val = lblLatidud.getText().toString().trim();
+        final String lng_val = lblLongitud.getText().toString().trim();
 
         if (!TextUtils.isEmpty(title_val)&& !TextUtils.isEmpty(desc_val) && mimageUri != null){
             mProgressDialog.show();

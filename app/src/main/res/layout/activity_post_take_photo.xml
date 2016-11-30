@@ -11,7 +11,7 @@
 
     <ImageButton
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" app:srcCompat="@mipmap/add_btn"
+        android:layout_height="wrap_content" app:srcCompat="@mipmap/add_btn_takephoto"
         android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
         android:id="@+id/take_photo_capture" android:background="@android:color/white"
         android:adjustViewBounds="true" android:scaleType="centerCrop" android:maxHeight="300dp"
@@ -67,7 +67,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp" app:srcCompat="@drawable/mark"
         android:layout_above="@+id/submitBtn_photo" android:layout_centerHorizontal="true"
-        android:id="@+id/imageView2"/>
+        android:id="@+id/icon_mark_successfuly_location" android:visibility="invisible"/>
 
 
 </RelativeLayout>
