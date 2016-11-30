@@ -3,9 +3,12 @@ package com.sine.tapahuevos2;
 import android.*;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,6 +27,12 @@ import android.widget.TextView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -53,7 +62,57 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
     private Button mgetlocalitacion;
     private TextView lblLatidud;
     private TextView lblLongitud;
+    double lat = 0.0;
+    double lng = 0.0;
 
+
+
+    private void actualizarUbicacion(Location location) {
+
+        if (location != null) {
+            lat = location.getLatitude();
+            lblLatidud.setText("Latitud:"+String.valueOf(lat));
+            lng = location.getLongitude();
+            lblLongitud.setText("Longitud:"+String.valueOf(lng));
+
+
+
+        }
+    }
+
+    LocationListener mLocationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+            actualizarUbicacion(location);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+    private void miUbicacion() {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        actualizarUbicacion(location);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,15000,0,mLocationListener);
+
+    }
 
 
 
@@ -71,8 +130,9 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
         mdescField = (EditText) findViewById(R.id.descField_photo);
         mSubmitBtn = (Button)  findViewById(R.id.submitBtn_photo);
         mgetlocalitacion= (Button) findViewById(R.id.localitation_btn_takephoto);
-     //   lblLatidud= (TextView) findViewById(R.id.lblLatitud_takephoto);
-      //  lblLongitud = (TextView) findViewById(R.id.lolLongitud_takephoto);
+        lblLatidud = (TextView) findViewById(R.id.lat_texview_take_photo);
+        lblLongitud = (TextView) findViewById(R.id.lng_texview_take_photo);
+
 
       /*  apiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
@@ -80,6 +140,15 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
                 .addApi(LocationServices.API)
                 .build();
 */
+
+        mgetlocalitacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                miUbicacion();
+
+            }
+        });
 
         mProgressDialog = new  ProgressDialog(this);
 
@@ -92,10 +161,6 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                startActivityForResult(intent,CAMARA_REQUEST_CODE);
 
-
-               //Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-               //galleryIntent.setType("image/*");
-               //startActivityForResult(galleryIntent, GALLERY_REQUEST);
            }
        });
 
@@ -110,6 +175,8 @@ public class PostActivity_takephoto extends AppCompatActivity  /*implements
         });
 
     }
+
+
 
 
     /*

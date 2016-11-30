@@ -22,7 +22,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    public GoogleMap mMap;
     private Marker marcador;
     double lat = 0.0;
     double lng = 0.0;
