@@ -6,17 +6,39 @@ package com.sine.tapahuevos2;
 
 public class Blog {
 
-    private String title, desc, image;
+    private String title, desc, image,latitud,longitud;
 
     public Blog(){
 
 
     }
 
-    public Blog(String title, String desc, String image) {
+    public Blog(String title, String desc, String image,String latitud, String longitud) {
         this.title = title;
         this.desc = desc;
         this.image = image;
+        this.latitud = latitud;
+        this.longitud = longitud;
+
+
+
+    }
+
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 
     public String getDesc() {

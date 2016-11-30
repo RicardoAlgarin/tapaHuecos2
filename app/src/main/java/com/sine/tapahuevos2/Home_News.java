@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fasterxml.jackson.databind.node.IntNode;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -51,6 +52,9 @@ public class Home_News extends AppCompatActivity {
             public void onClick(View v) {
                 Snackbar.make(v, "Se presionó el FAB", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                startActivity(new Intent(Home_News.this, MapsActivity.class));
+
             }
         });
 
@@ -105,6 +109,8 @@ public class Home_News extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+        /*        viewHolder.setlatitud(model.getLatitud());
+                viewHolder.setlongitud(model.getLongitud());*/
                 viewHolder.setImage(getApplicationContext(), model.getImage());
 
 
@@ -123,6 +129,8 @@ public class Home_News extends AppCompatActivity {
 
                 viewHolder.setTitle(model.getTitle());
                 viewHolder.setDesc(model.getDesc());
+     /*             viewHolder.setlatitud(model.getLatitud());
+               viewHolder.setlongitud(model.getLongitud());*/
                 viewHolder.setImage(getApplicationContext(), model.getImage());
 
             }
@@ -161,6 +169,19 @@ public class Home_News extends AppCompatActivity {
             post_desc.setText(desc);
 
         }
+
+   /*   public void setlatitud (String latitud){
+
+            TextView post_latitud = (TextView) mView.findViewById(R.id.post_latitud);
+            post_latitud.setText(latitud);
+        }
+
+        public void  setlongitud (String longitud) {
+
+            TextView post_longitud = (TextView) mView.findViewById(R.id.post_longitud);
+            post_longitud.setText(longitud);
+        }
+        */
 
         public  void  setImage (final Context ctx, final String image){
 
@@ -201,6 +222,18 @@ public class Home_News extends AppCompatActivity {
 
         }
 
+   /*     public void setlatitud (String latitud){
+
+            TextView post_latitud = (TextView) mView.findViewById(R.id.post_latitud_photo);
+            post_latitud.setText(latitud);
+        }
+
+        public void  setlongitud (String longitud){
+
+            TextView post_longitud = (TextView) mView.findViewById(R.id.post_longitud_photo);
+            post_longitud.setText(longitud);
+        }
+*/
         public  void  setImage (Context ctx, String image){
 
             ImageView post_image = (ImageView)mView.findViewById(R.id.post_image_photo);
@@ -252,6 +285,11 @@ public class Home_News extends AppCompatActivity {
 
             Intent close = new Intent(Intent.ACTION_MAIN);
             finish();
+        }
+
+        if(item.getItemId() == R.id.action_about_us){
+
+            startActivity(new Intent(Home_News.this, About_us.class));
         }
 
         return super.onOptionsItemSelected(item);

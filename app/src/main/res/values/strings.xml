@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">TapaHuevos2</string>
-    <string name="title_activity_home__news">Home_News</string>
+    <string name="app_name">Reparche App</string>
+    <string name="title_activity_home__news">Noticias</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="title_activity_home__news2">Home_News2</string>
+    <string name="title_activity_home__news2">Noticias</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyD34SOEcSyqs_yBi14l0sRRAoIb87xyOBY</string>
 </resources>
